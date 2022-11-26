@@ -115,7 +115,13 @@ class PostsService extends BaseService {
           html.getElementById("__COHOST_LOADER_STATE__")?.innerHtml;
       // TODO fix up these exceptions
       if (rawPosts == null) throw Exception('aa');
-      List<dynamic> posts = jsonDecode(rawPosts)['dashboard']['posts'];
+
+      List<dynamic> posts;
+      if (timestamp != null) {
+        posts = jsonDecode(rawPosts)['dashboard-nonlive-post-feed']['posts'];
+      } else {
+        posts = jsonDecode(rawPosts)['dashboard']['posts'];
+      }
       return posts.map((e) => Post.fromJson(e)).toList();
     } catch (e) {
       throw Exception(e.toString());
