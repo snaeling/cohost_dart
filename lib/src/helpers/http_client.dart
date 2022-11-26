@@ -54,7 +54,7 @@ class HttpClient extends HttpClientBase {
       'Cookie': _sessionCookie,
     };
     final Uri uri = Uri.https(_authority, path, queryParameters);
-    final res = await http.post(uri, body: data);
+    final res = await http.post(uri, body: data, headers: headers);
 
     return raw ? res as T : jsonDecode(utf8.decode(res.bodyBytes)) as T;
   }
