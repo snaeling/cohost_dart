@@ -42,19 +42,6 @@ class PostsService extends BaseService {
     }
   }
 
-  Future<Post> getPostsByTag(int id) async {
-    try {
-      final res = await httpClient
-          .get(
-            path: '$api/project_post/$id',
-          )
-          .timeout(httpClient.timeout);
-      return Post.fromJson(res);
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
-
   /// Returns a list of [Comment] objects based on a specified.
   /// Not implemented as it is not implemented server-side.
   ///
