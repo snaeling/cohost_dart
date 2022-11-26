@@ -108,12 +108,18 @@ class PostsService extends BaseService {
     }
   }
 
-  Future<List<Post>> htmlDashboard() async {
+  Future<List<Post>> htmlDashboard([DateTime? timestamp, int? skip = 0]) async {
     try {
       Response res = await httpClient
           .get(
             path: "/",
             raw: true,
+            queryParameters: timestamp != null
+                ? {
+                    "refTimestamp": timestamp.millisecondsSinceEpoch.toString(),
+                    "skipPosts": skip.toString()
+                  }
+                : {},
           )
           .timeout(httpClient.timeout);
       print(res);
@@ -129,12 +135,19 @@ class PostsService extends BaseService {
     }
   }
 
-  Future<List<Post>> htmlTagged(String tag) async {
+  Future<List<Post>> htmlTagged(String tag,
+      [DateTime? timestamp, int? skip = 0]) async {
     try {
       Response res = await httpClient
           .get(
             path: "/rc/tagged/$tag",
             raw: true,
+            queryParameters: timestamp != null
+                ? {
+                    "refTimestamp": timestamp.millisecondsSinceEpoch.toString(),
+                    "skipPosts": skip.toString()
+                  }
+                : {},
           )
           .timeout(httpClient.timeout);
       print(res);

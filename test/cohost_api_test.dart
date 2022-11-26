@@ -26,4 +26,8 @@ void main() {
   test('searchquery', () async {
     await cohost.search.query("test");
   });
+
+  test('tagpagination', () async {
+    print(await cohost.posts.htmlTagged("tutorial", DateTime.now(), 20));
+  });
 }
