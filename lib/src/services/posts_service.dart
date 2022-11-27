@@ -5,6 +5,8 @@ import 'package:cohost_api/src/services/base_service.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart';
 
+import '../exceptions/exceptions.dart';
+
 class PostsService extends BaseService {
   const PostsService(super.httpClient);
 
@@ -114,7 +116,7 @@ class PostsService extends BaseService {
       final rawPosts =
           html.getElementById("__COHOST_LOADER_STATE__")?.innerHtml;
       // TODO fix up these exceptions
-      if (rawPosts == null) throw Exception('aa');
+      if (rawPosts == null) throw UnauthorizedException('Invalid cookie');
 
       List<dynamic> posts;
       if (timestamp != null) {
@@ -123,6 +125,8 @@ class PostsService extends BaseService {
         posts = jsonDecode(rawPosts)['dashboard']['posts'];
       }
       return posts.map((e) => Post.fromJson(e)).toList();
+    } on UnauthorizedException {
+      throw UnauthorizedException('Invalid cookie');
     } catch (e) {
       throw Exception(e.toString());
     }

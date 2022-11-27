@@ -1,6 +1,8 @@
 import 'package:cohost_api/cohost.dart';
 import 'package:cohost_api/src/services/base_service.dart';
 
+import '../exceptions/exceptions.dart';
+
 class SearchService extends BaseService {
   const SearchService(super.httpClient);
 
@@ -17,6 +19,8 @@ class SearchService extends BaseService {
           },
         },
       ).timeout(httpClient.timeout);
+      if ((res[0] as Map).containsKey('error'))
+        throw UnauthorizedException('Invalid cookie');
       List<dynamic> projectsJson = res[0]['result']['data']['projects'];
       List<Project> projectsList =
           projectsJson.map((e) => Project.fromJson(e)).toList();
@@ -24,6 +28,8 @@ class SearchService extends BaseService {
       List<Tag> tagsList = tagsJson.map((e) => Tag.fromJson(e)).toList();
 
       return SearchResult(tags: tagsList, projects: projectsList);
+    } on UnauthorizedException {
+      throw UnauthorizedException('Invalid cookie');
     } catch (e) {
       throw Exception(e.toString());
     }

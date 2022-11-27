@@ -42,3 +42,4 @@ library cohost;
 
 export 'src/models/_models.dart';
 export 'src/cohost.dart';
+export 'src/exceptions/exceptions.dart';
