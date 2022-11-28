@@ -204,7 +204,6 @@ mixin _$Post {
   int get numSharedComments => throw _privateConstructorUsedError;
   List<String> get cws => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _blocksFromJson)
   List<PostBlock>? get blocks => throw _privateConstructorUsedError;
   String get plainTextBody => throw _privateConstructorUsedError;
   Project get postingProject => throw _privateConstructorUsedError;
@@ -245,7 +244,7 @@ abstract class $PostCopyWith<$Res> {
       int numSharedComments,
       List<String> cws,
       List<String> tags,
-      @JsonKey(fromJson: _blocksFromJson) List<PostBlock>? blocks,
+      List<PostBlock>? blocks,
       String plainTextBody,
       Project postingProject,
       List<Post> shareTree,
@@ -446,7 +445,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       int numSharedComments,
       List<String> cws,
       List<String> tags,
-      @JsonKey(fromJson: _blocksFromJson) List<PostBlock>? blocks,
+      List<PostBlock>? blocks,
       String plainTextBody,
       Project postingProject,
       List<Post> shareTree,
@@ -633,8 +632,7 @@ class _$_Post implements _Post {
       required this.numSharedComments,
       required final List<String> cws,
       required final List<String> tags,
-      @JsonKey(fromJson: _blocksFromJson)
-          required final List<PostBlock>? blocks,
+      required final List<PostBlock>? blocks,
       required this.plainTextBody,
       required this.postingProject,
       required final List<Post> shareTree,
@@ -691,7 +689,6 @@ class _$_Post implements _Post {
 
   final List<PostBlock>? _blocks;
   @override
-  @JsonKey(fromJson: _blocksFromJson)
   List<PostBlock>? get blocks {
     final value = _blocks;
     if (value == null) return null;
@@ -863,8 +860,7 @@ abstract class _Post implements Post {
       required final int numSharedComments,
       required final List<String> cws,
       required final List<String> tags,
-      @JsonKey(fromJson: _blocksFromJson)
-          required final List<PostBlock>? blocks,
+      required final List<PostBlock>? blocks,
       required final String plainTextBody,
       required final Project postingProject,
       required final List<Post> shareTree,
@@ -905,7 +901,6 @@ abstract class _Post implements Post {
   @override
   List<String> get tags;
   @override
-  @JsonKey(fromJson: _blocksFromJson)
   List<PostBlock>? get blocks;
   @override
   String get plainTextBody;
@@ -942,6 +937,588 @@ abstract class _Post implements Post {
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;
+}
+
+PostBlock _$PostBlockFromJson(Map<String, dynamic> json) {
+  return _PostBlock.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PostBlock {
+  /// The [PostBlockType] of the block, can either be `markdown` or
+  /// `attachment`.
+  ///
+  /// Consider using `when` to determine whether a block is a markdown block
+  /// or an attachment block instead of this field.
+  ///
+  /// ```
+  /// PostBlock.when(
+  ///   markdown: => print("This block is a markdown."),
+  ///   attachment: => print("This block is an attachment.")
+  /// )
+  /// ```
+  PostBlockType get type => throw _privateConstructorUsedError;
+  MarkdownBlock? get markdown => throw _privateConstructorUsedError;
+  AttachmentBlock? get attachment => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PostBlockCopyWith<PostBlock> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PostBlockCopyWith<$Res> {
+  factory $PostBlockCopyWith(PostBlock value, $Res Function(PostBlock) then) =
+      _$PostBlockCopyWithImpl<$Res, PostBlock>;
+  @useResult
+  $Res call(
+      {PostBlockType type,
+      MarkdownBlock? markdown,
+      AttachmentBlock? attachment});
+
+  $MarkdownBlockCopyWith<$Res>? get markdown;
+  $AttachmentBlockCopyWith<$Res>? get attachment;
+}
+
+/// @nodoc
+class _$PostBlockCopyWithImpl<$Res, $Val extends PostBlock>
+    implements $PostBlockCopyWith<$Res> {
+  _$PostBlockCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? markdown = freezed,
+    Object? attachment = freezed,
+  }) {
+    return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PostBlockType,
+      markdown: freezed == markdown
+          ? _value.markdown
+          : markdown // ignore: cast_nullable_to_non_nullable
+              as MarkdownBlock?,
+      attachment: freezed == attachment
+          ? _value.attachment
+          : attachment // ignore: cast_nullable_to_non_nullable
+              as AttachmentBlock?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MarkdownBlockCopyWith<$Res>? get markdown {
+    if (_value.markdown == null) {
+      return null;
+    }
+
+    return $MarkdownBlockCopyWith<$Res>(_value.markdown!, (value) {
+      return _then(_value.copyWith(markdown: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AttachmentBlockCopyWith<$Res>? get attachment {
+    if (_value.attachment == null) {
+      return null;
+    }
+
+    return $AttachmentBlockCopyWith<$Res>(_value.attachment!, (value) {
+      return _then(_value.copyWith(attachment: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_PostBlockCopyWith<$Res> implements $PostBlockCopyWith<$Res> {
+  factory _$$_PostBlockCopyWith(
+          _$_PostBlock value, $Res Function(_$_PostBlock) then) =
+      __$$_PostBlockCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {PostBlockType type,
+      MarkdownBlock? markdown,
+      AttachmentBlock? attachment});
+
+  @override
+  $MarkdownBlockCopyWith<$Res>? get markdown;
+  @override
+  $AttachmentBlockCopyWith<$Res>? get attachment;
+}
+
+/// @nodoc
+class __$$_PostBlockCopyWithImpl<$Res>
+    extends _$PostBlockCopyWithImpl<$Res, _$_PostBlock>
+    implements _$$_PostBlockCopyWith<$Res> {
+  __$$_PostBlockCopyWithImpl(
+      _$_PostBlock _value, $Res Function(_$_PostBlock) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? markdown = freezed,
+    Object? attachment = freezed,
+  }) {
+    return _then(_$_PostBlock(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PostBlockType,
+      markdown: freezed == markdown
+          ? _value.markdown
+          : markdown // ignore: cast_nullable_to_non_nullable
+              as MarkdownBlock?,
+      attachment: freezed == attachment
+          ? _value.attachment
+          : attachment // ignore: cast_nullable_to_non_nullable
+              as AttachmentBlock?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PostBlock implements _PostBlock {
+  const _$_PostBlock({required this.type, this.markdown, this.attachment});
+
+  factory _$_PostBlock.fromJson(Map<String, dynamic> json) =>
+      _$$_PostBlockFromJson(json);
+
+  /// The [PostBlockType] of the block, can either be `markdown` or
+  /// `attachment`.
+  ///
+  /// Consider using `when` to determine whether a block is a markdown block
+  /// or an attachment block instead of this field.
+  ///
+  /// ```
+  /// PostBlock.when(
+  ///   markdown: => print("This block is a markdown."),
+  ///   attachment: => print("This block is an attachment.")
+  /// )
+  /// ```
+  @override
+  final PostBlockType type;
+  @override
+  final MarkdownBlock? markdown;
+  @override
+  final AttachmentBlock? attachment;
+
+  @override
+  String toString() {
+    return 'PostBlock(type: $type, markdown: $markdown, attachment: $attachment)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PostBlock &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.markdown, markdown) ||
+                other.markdown == markdown) &&
+            (identical(other.attachment, attachment) ||
+                other.attachment == attachment));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, type, markdown, attachment);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PostBlockCopyWith<_$_PostBlock> get copyWith =>
+      __$$_PostBlockCopyWithImpl<_$_PostBlock>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PostBlockToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PostBlock implements PostBlock {
+  const factory _PostBlock(
+      {required final PostBlockType type,
+      final MarkdownBlock? markdown,
+      final AttachmentBlock? attachment}) = _$_PostBlock;
+
+  factory _PostBlock.fromJson(Map<String, dynamic> json) =
+      _$_PostBlock.fromJson;
+
+  @override
+
+  /// The [PostBlockType] of the block, can either be `markdown` or
+  /// `attachment`.
+  ///
+  /// Consider using `when` to determine whether a block is a markdown block
+  /// or an attachment block instead of this field.
+  ///
+  /// ```
+  /// PostBlock.when(
+  ///   markdown: => print("This block is a markdown."),
+  ///   attachment: => print("This block is an attachment.")
+  /// )
+  /// ```
+  PostBlockType get type;
+  @override
+  MarkdownBlock? get markdown;
+  @override
+  AttachmentBlock? get attachment;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PostBlockCopyWith<_$_PostBlock> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MarkdownBlock _$MarkdownBlockFromJson(Map<String, dynamic> json) {
+  return _MarkdownBlock.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MarkdownBlock {
+  String? get content => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MarkdownBlockCopyWith<MarkdownBlock> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MarkdownBlockCopyWith<$Res> {
+  factory $MarkdownBlockCopyWith(
+          MarkdownBlock value, $Res Function(MarkdownBlock) then) =
+      _$MarkdownBlockCopyWithImpl<$Res, MarkdownBlock>;
+  @useResult
+  $Res call({String? content});
+}
+
+/// @nodoc
+class _$MarkdownBlockCopyWithImpl<$Res, $Val extends MarkdownBlock>
+    implements $MarkdownBlockCopyWith<$Res> {
+  _$MarkdownBlockCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? content = freezed,
+  }) {
+    return _then(_value.copyWith(
+      content: freezed == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MarkdownBlockCopyWith<$Res>
+    implements $MarkdownBlockCopyWith<$Res> {
+  factory _$$_MarkdownBlockCopyWith(
+          _$_MarkdownBlock value, $Res Function(_$_MarkdownBlock) then) =
+      __$$_MarkdownBlockCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? content});
+}
+
+/// @nodoc
+class __$$_MarkdownBlockCopyWithImpl<$Res>
+    extends _$MarkdownBlockCopyWithImpl<$Res, _$_MarkdownBlock>
+    implements _$$_MarkdownBlockCopyWith<$Res> {
+  __$$_MarkdownBlockCopyWithImpl(
+      _$_MarkdownBlock _value, $Res Function(_$_MarkdownBlock) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? content = freezed,
+  }) {
+    return _then(_$_MarkdownBlock(
+      content: freezed == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MarkdownBlock implements _MarkdownBlock {
+  const _$_MarkdownBlock({this.content});
+
+  factory _$_MarkdownBlock.fromJson(Map<String, dynamic> json) =>
+      _$$_MarkdownBlockFromJson(json);
+
+  @override
+  final String? content;
+
+  @override
+  String toString() {
+    return 'MarkdownBlock(content: $content)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MarkdownBlock &&
+            (identical(other.content, content) || other.content == content));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, content);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MarkdownBlockCopyWith<_$_MarkdownBlock> get copyWith =>
+      __$$_MarkdownBlockCopyWithImpl<_$_MarkdownBlock>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MarkdownBlockToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MarkdownBlock implements MarkdownBlock {
+  const factory _MarkdownBlock({final String? content}) = _$_MarkdownBlock;
+
+  factory _MarkdownBlock.fromJson(Map<String, dynamic> json) =
+      _$_MarkdownBlock.fromJson;
+
+  @override
+  String? get content;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MarkdownBlockCopyWith<_$_MarkdownBlock> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+AttachmentBlock _$AttachmentBlockFromJson(Map<String, dynamic> json) {
+  return _AttachmentBlock.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AttachmentBlock {
+  String? get fileURL => throw _privateConstructorUsedError;
+  String? get previewURL => throw _privateConstructorUsedError;
+  String? get attachmentId => throw _privateConstructorUsedError;
+  String? get altText => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AttachmentBlockCopyWith<AttachmentBlock> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AttachmentBlockCopyWith<$Res> {
+  factory $AttachmentBlockCopyWith(
+          AttachmentBlock value, $Res Function(AttachmentBlock) then) =
+      _$AttachmentBlockCopyWithImpl<$Res, AttachmentBlock>;
+  @useResult
+  $Res call(
+      {String? fileURL,
+      String? previewURL,
+      String? attachmentId,
+      String? altText});
+}
+
+/// @nodoc
+class _$AttachmentBlockCopyWithImpl<$Res, $Val extends AttachmentBlock>
+    implements $AttachmentBlockCopyWith<$Res> {
+  _$AttachmentBlockCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fileURL = freezed,
+    Object? previewURL = freezed,
+    Object? attachmentId = freezed,
+    Object? altText = freezed,
+  }) {
+    return _then(_value.copyWith(
+      fileURL: freezed == fileURL
+          ? _value.fileURL
+          : fileURL // ignore: cast_nullable_to_non_nullable
+              as String?,
+      previewURL: freezed == previewURL
+          ? _value.previewURL
+          : previewURL // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attachmentId: freezed == attachmentId
+          ? _value.attachmentId
+          : attachmentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      altText: freezed == altText
+          ? _value.altText
+          : altText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_AttachmentBlockCopyWith<$Res>
+    implements $AttachmentBlockCopyWith<$Res> {
+  factory _$$_AttachmentBlockCopyWith(
+          _$_AttachmentBlock value, $Res Function(_$_AttachmentBlock) then) =
+      __$$_AttachmentBlockCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? fileURL,
+      String? previewURL,
+      String? attachmentId,
+      String? altText});
+}
+
+/// @nodoc
+class __$$_AttachmentBlockCopyWithImpl<$Res>
+    extends _$AttachmentBlockCopyWithImpl<$Res, _$_AttachmentBlock>
+    implements _$$_AttachmentBlockCopyWith<$Res> {
+  __$$_AttachmentBlockCopyWithImpl(
+      _$_AttachmentBlock _value, $Res Function(_$_AttachmentBlock) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fileURL = freezed,
+    Object? previewURL = freezed,
+    Object? attachmentId = freezed,
+    Object? altText = freezed,
+  }) {
+    return _then(_$_AttachmentBlock(
+      fileURL: freezed == fileURL
+          ? _value.fileURL
+          : fileURL // ignore: cast_nullable_to_non_nullable
+              as String?,
+      previewURL: freezed == previewURL
+          ? _value.previewURL
+          : previewURL // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attachmentId: freezed == attachmentId
+          ? _value.attachmentId
+          : attachmentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      altText: freezed == altText
+          ? _value.altText
+          : altText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_AttachmentBlock implements _AttachmentBlock {
+  const _$_AttachmentBlock(
+      {this.fileURL, this.previewURL, this.attachmentId, this.altText});
+
+  factory _$_AttachmentBlock.fromJson(Map<String, dynamic> json) =>
+      _$$_AttachmentBlockFromJson(json);
+
+  @override
+  final String? fileURL;
+  @override
+  final String? previewURL;
+  @override
+  final String? attachmentId;
+  @override
+  final String? altText;
+
+  @override
+  String toString() {
+    return 'AttachmentBlock(fileURL: $fileURL, previewURL: $previewURL, attachmentId: $attachmentId, altText: $altText)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AttachmentBlock &&
+            (identical(other.fileURL, fileURL) || other.fileURL == fileURL) &&
+            (identical(other.previewURL, previewURL) ||
+                other.previewURL == previewURL) &&
+            (identical(other.attachmentId, attachmentId) ||
+                other.attachmentId == attachmentId) &&
+            (identical(other.altText, altText) || other.altText == altText));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, fileURL, previewURL, attachmentId, altText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AttachmentBlockCopyWith<_$_AttachmentBlock> get copyWith =>
+      __$$_AttachmentBlockCopyWithImpl<_$_AttachmentBlock>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AttachmentBlockToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AttachmentBlock implements AttachmentBlock {
+  const factory _AttachmentBlock(
+      {final String? fileURL,
+      final String? previewURL,
+      final String? attachmentId,
+      final String? altText}) = _$_AttachmentBlock;
+
+  factory _AttachmentBlock.fromJson(Map<String, dynamic> json) =
+      _$_AttachmentBlock.fromJson;
+
+  @override
+  String? get fileURL;
+  @override
+  String? get previewURL;
+  @override
+  String? get attachmentId;
+  @override
+  String? get altText;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AttachmentBlockCopyWith<_$_AttachmentBlock> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Project _$ProjectFromJson(Map<String, dynamic> json) {

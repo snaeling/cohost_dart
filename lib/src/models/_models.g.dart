@@ -35,7 +35,9 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       numSharedComments: json['numSharedComments'] as int,
       cws: (json['cws'] as List<dynamic>).map((e) => e as String).toList(),
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
-      blocks: _blocksFromJson(json['blocks'] as List),
+      blocks: (json['blocks'] as List<dynamic>?)
+          ?.map((e) => PostBlock.fromJson(e as Map<String, dynamic>))
+          .toList(),
       plainTextBody: json['plainTextBody'] as String,
       postingProject:
           Project.fromJson(json['postingProject'] as Map<String, dynamic>),
@@ -89,6 +91,55 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'hasCohostPlus': instance.hasCohostPlus,
       'pinned': instance.pinned,
       'commentsLocked': instance.commentsLocked,
+    };
+
+_$_PostBlock _$$_PostBlockFromJson(Map<String, dynamic> json) => _$_PostBlock(
+      type: $enumDecode(_$PostBlockTypeEnumMap, json['type']),
+      markdown: json['markdown'] == null
+          ? null
+          : MarkdownBlock.fromJson(json['markdown'] as Map<String, dynamic>),
+      attachment: json['attachment'] == null
+          ? null
+          : AttachmentBlock.fromJson(
+              json['attachment'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_PostBlockToJson(_$_PostBlock instance) =>
+    <String, dynamic>{
+      'type': _$PostBlockTypeEnumMap[instance.type]!,
+      'markdown': instance.markdown,
+      'attachment': instance.attachment,
+    };
+
+const _$PostBlockTypeEnumMap = {
+  PostBlockType.markdown: 'markdown',
+  PostBlockType.attachment: 'attachment',
+};
+
+_$_MarkdownBlock _$$_MarkdownBlockFromJson(Map<String, dynamic> json) =>
+    _$_MarkdownBlock(
+      content: json['content'] as String?,
+    );
+
+Map<String, dynamic> _$$_MarkdownBlockToJson(_$_MarkdownBlock instance) =>
+    <String, dynamic>{
+      'content': instance.content,
+    };
+
+_$_AttachmentBlock _$$_AttachmentBlockFromJson(Map<String, dynamic> json) =>
+    _$_AttachmentBlock(
+      fileURL: json['fileURL'] as String?,
+      previewURL: json['previewURL'] as String?,
+      attachmentId: json['attachmentId'] as String?,
+      altText: json['altText'] as String?,
+    );
+
+Map<String, dynamic> _$$_AttachmentBlockToJson(_$_AttachmentBlock instance) =>
+    <String, dynamic>{
+      'fileURL': instance.fileURL,
+      'previewURL': instance.previewURL,
+      'attachmentId': instance.attachmentId,
+      'altText': instance.altText,
     };
 
 _$_Project _$$_ProjectFromJson(Map<String, dynamic> json) => _$_Project(

@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
-import 'package:cohost_api/src/helpers/client_hash_helper.dart';
 import 'package:cohost_api/src/models/_models.dart';
 import 'package:cohost_api/src/services/base_service.dart';
 import 'package:cryptography/cryptography.dart';
@@ -33,44 +33,32 @@ class UserService extends BaseService {
     String? cookie,
     String? email,
     String? password,
+    String? clientHash,
   }) async {
     if (cookie != null) {
       httpClient.setCookie = cookie;
       return cookie;
     }
     try {
-      var saltRes = await httpClient.get(
-        path: '$api/login/salt',
-        queryParameters: {'email': email},
-      ).timeout(httpClient.timeout);
+      var saltDecoded = await salt(email: email!);
 
-      String salt = saltRes['salt'];
-      // from cohost.py, ty. i reimplemented the .js the site uses originally lol
-      // https://github.com/valknight/Cohost.py/blob/b604a3963db833c9b7ac1d0e8207948c29842887/cohost/models/user.py#L85
-      salt = salt.replaceAll('-', 'A');
-      salt = salt.replaceAll('_', 'A');
-      salt = "$salt==";
+      if (clientHash == null) {
+        final pbkdf2 = Pbkdf2(
+          macAlgorithm: Hmac(Sha384()),
+          iterations: 200000,
+          bits: 1024,
+        );
 
-      //salt = await hashHelper.calculateHash(salt, password!);
-
-      final saltDecoded = base64Decode(ascii.decode(ascii.encode(salt)));
-
-      // make sure to put this in an isolate gamers!!
-      final pbkdf2 = Pbkdf2(
-        macAlgorithm: Hmac(Sha384()),
-        iterations: 200000,
-        bits: 1024,
-      );
-
-      final newSecretKey = await pbkdf2.deriveKey(
-        secretKey: SecretKey(utf8.encode(password!)),
-        nonce: saltDecoded,
-      );
-      final bytes = await newSecretKey.extractBytes();
-      var clientHash = base64Encode(bytes);
+        final newSecretKey = await pbkdf2.deriveKey(
+          secretKey: SecretKey(utf8.encode(password!)),
+          nonce: saltDecoded,
+        );
+        final bytes = await newSecretKey.extractBytes();
+        clientHash = base64Encode(bytes);
+      }
 
       Map<String, String> data = {
-        'email': email as String,
+        'email': email,
         'clientHash': clientHash,
       };
 
@@ -90,6 +78,28 @@ class UserService extends BaseService {
       return cookie;
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  Future<Uint8List> salt({
+    required String email,
+  }) async {
+    try {
+      var saltRes = await httpClient.get(
+        path: '$api/login/salt',
+        queryParameters: {'email': email},
+      ).timeout(httpClient.timeout);
+
+      String salt = saltRes['salt'];
+      // from cohost.py, ty. i reimplemented the .js the site uses originally lol
+      // https://github.com/valknight/Cohost.py/blob/b604a3963db833c9b7ac1d0e8207948c29842887/cohost/models/user.py#L85
+      salt = salt.replaceAll('-', 'A');
+      salt = salt.replaceAll('_', 'A');
+      salt = "$salt==";
+
+      return base64Decode(ascii.decode(ascii.encode(salt)));
+    } catch (e) {
+      rethrow;
     }
   }
 

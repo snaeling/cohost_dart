@@ -24,7 +24,7 @@ class Post with _$Post {
     required int numSharedComments,
     required List<String> cws,
     required List<String> tags,
-    @JsonKey(fromJson: _blocksFromJson) required List<PostBlock>? blocks,
+    required List<PostBlock>? blocks,
     required String plainTextBody,
     required Project postingProject,
     required List<Post> shareTree,
