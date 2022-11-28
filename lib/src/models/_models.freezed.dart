@@ -3292,3 +3292,711 @@ abstract class _SearchResult implements SearchResult {
   _$$_SearchResultCopyWith<_$_SearchResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+UserState _$UserStateFromJson(Map<String, dynamic> json) {
+  return _UserState.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UserState {
+  List<Project> get editedProjects => throw _privateConstructorUsedError;
+  int? get numNotifcation => throw _privateConstructorUsedError;
+  int? get numFollowRequests => throw _privateConstructorUsedError;
+  List<String>? get bookmarkedTags => throw _privateConstructorUsedError;
+  bool? get hasActiveSubscription => throw _privateConstructorUsedError;
+  UserDisplayPrefs? get displayPrefs => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $UserStateCopyWith<UserState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserStateCopyWith<$Res> {
+  factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
+      _$UserStateCopyWithImpl<$Res, UserState>;
+  @useResult
+  $Res call(
+      {List<Project> editedProjects,
+      int? numNotifcation,
+      int? numFollowRequests,
+      List<String>? bookmarkedTags,
+      bool? hasActiveSubscription,
+      UserDisplayPrefs? displayPrefs,
+      User? user});
+
+  $UserDisplayPrefsCopyWith<$Res>? get displayPrefs;
+  $UserCopyWith<$Res>? get user;
+}
+
+/// @nodoc
+class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
+    implements $UserStateCopyWith<$Res> {
+  _$UserStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? editedProjects = null,
+    Object? numNotifcation = freezed,
+    Object? numFollowRequests = freezed,
+    Object? bookmarkedTags = freezed,
+    Object? hasActiveSubscription = freezed,
+    Object? displayPrefs = freezed,
+    Object? user = freezed,
+  }) {
+    return _then(_value.copyWith(
+      editedProjects: null == editedProjects
+          ? _value.editedProjects
+          : editedProjects // ignore: cast_nullable_to_non_nullable
+              as List<Project>,
+      numNotifcation: freezed == numNotifcation
+          ? _value.numNotifcation
+          : numNotifcation // ignore: cast_nullable_to_non_nullable
+              as int?,
+      numFollowRequests: freezed == numFollowRequests
+          ? _value.numFollowRequests
+          : numFollowRequests // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bookmarkedTags: freezed == bookmarkedTags
+          ? _value.bookmarkedTags
+          : bookmarkedTags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      hasActiveSubscription: freezed == hasActiveSubscription
+          ? _value.hasActiveSubscription
+          : hasActiveSubscription // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      displayPrefs: freezed == displayPrefs
+          ? _value.displayPrefs
+          : displayPrefs // ignore: cast_nullable_to_non_nullable
+              as UserDisplayPrefs?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserDisplayPrefsCopyWith<$Res>? get displayPrefs {
+    if (_value.displayPrefs == null) {
+      return null;
+    }
+
+    return $UserDisplayPrefsCopyWith<$Res>(_value.displayPrefs!, (value) {
+      return _then(_value.copyWith(displayPrefs: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+  factory _$$_UserStateCopyWith(
+          _$_UserState value, $Res Function(_$_UserState) then) =
+      __$$_UserStateCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<Project> editedProjects,
+      int? numNotifcation,
+      int? numFollowRequests,
+      List<String>? bookmarkedTags,
+      bool? hasActiveSubscription,
+      UserDisplayPrefs? displayPrefs,
+      User? user});
+
+  @override
+  $UserDisplayPrefsCopyWith<$Res>? get displayPrefs;
+  @override
+  $UserCopyWith<$Res>? get user;
+}
+
+/// @nodoc
+class __$$_UserStateCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res, _$_UserState>
+    implements _$$_UserStateCopyWith<$Res> {
+  __$$_UserStateCopyWithImpl(
+      _$_UserState _value, $Res Function(_$_UserState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? editedProjects = null,
+    Object? numNotifcation = freezed,
+    Object? numFollowRequests = freezed,
+    Object? bookmarkedTags = freezed,
+    Object? hasActiveSubscription = freezed,
+    Object? displayPrefs = freezed,
+    Object? user = freezed,
+  }) {
+    return _then(_$_UserState(
+      editedProjects: null == editedProjects
+          ? _value._editedProjects
+          : editedProjects // ignore: cast_nullable_to_non_nullable
+              as List<Project>,
+      numNotifcation: freezed == numNotifcation
+          ? _value.numNotifcation
+          : numNotifcation // ignore: cast_nullable_to_non_nullable
+              as int?,
+      numFollowRequests: freezed == numFollowRequests
+          ? _value.numFollowRequests
+          : numFollowRequests // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bookmarkedTags: freezed == bookmarkedTags
+          ? _value._bookmarkedTags
+          : bookmarkedTags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      hasActiveSubscription: freezed == hasActiveSubscription
+          ? _value.hasActiveSubscription
+          : hasActiveSubscription // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      displayPrefs: freezed == displayPrefs
+          ? _value.displayPrefs
+          : displayPrefs // ignore: cast_nullable_to_non_nullable
+              as UserDisplayPrefs?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_UserState implements _UserState {
+  const _$_UserState(
+      {final List<Project> editedProjects = const <Project>[],
+      this.numNotifcation = 0,
+      this.numFollowRequests = 0,
+      final List<String>? bookmarkedTags = const <String>[],
+      this.hasActiveSubscription = false,
+      this.displayPrefs = const UserDisplayPrefs(),
+      this.user = const User(loggedIn: false)})
+      : _editedProjects = editedProjects,
+        _bookmarkedTags = bookmarkedTags;
+
+  factory _$_UserState.fromJson(Map<String, dynamic> json) =>
+      _$$_UserStateFromJson(json);
+
+  final List<Project> _editedProjects;
+  @override
+  @JsonKey()
+  List<Project> get editedProjects {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_editedProjects);
+  }
+
+  @override
+  @JsonKey()
+  final int? numNotifcation;
+  @override
+  @JsonKey()
+  final int? numFollowRequests;
+  final List<String>? _bookmarkedTags;
+  @override
+  @JsonKey()
+  List<String>? get bookmarkedTags {
+    final value = _bookmarkedTags;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  @JsonKey()
+  final bool? hasActiveSubscription;
+  @override
+  @JsonKey()
+  final UserDisplayPrefs? displayPrefs;
+  @override
+  @JsonKey()
+  final User? user;
+
+  @override
+  String toString() {
+    return 'UserState(editedProjects: $editedProjects, numNotifcation: $numNotifcation, numFollowRequests: $numFollowRequests, bookmarkedTags: $bookmarkedTags, hasActiveSubscription: $hasActiveSubscription, displayPrefs: $displayPrefs, user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UserState &&
+            const DeepCollectionEquality()
+                .equals(other._editedProjects, _editedProjects) &&
+            (identical(other.numNotifcation, numNotifcation) ||
+                other.numNotifcation == numNotifcation) &&
+            (identical(other.numFollowRequests, numFollowRequests) ||
+                other.numFollowRequests == numFollowRequests) &&
+            const DeepCollectionEquality()
+                .equals(other._bookmarkedTags, _bookmarkedTags) &&
+            (identical(other.hasActiveSubscription, hasActiveSubscription) ||
+                other.hasActiveSubscription == hasActiveSubscription) &&
+            (identical(other.displayPrefs, displayPrefs) ||
+                other.displayPrefs == displayPrefs) &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_editedProjects),
+      numNotifcation,
+      numFollowRequests,
+      const DeepCollectionEquality().hash(_bookmarkedTags),
+      hasActiveSubscription,
+      displayPrefs,
+      user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UserStateCopyWith<_$_UserState> get copyWith =>
+      __$$_UserStateCopyWithImpl<_$_UserState>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserStateToJson(
+      this,
+    );
+  }
+}
+
+abstract class _UserState implements UserState {
+  const factory _UserState(
+      {final List<Project> editedProjects,
+      final int? numNotifcation,
+      final int? numFollowRequests,
+      final List<String>? bookmarkedTags,
+      final bool? hasActiveSubscription,
+      final UserDisplayPrefs? displayPrefs,
+      final User? user}) = _$_UserState;
+
+  factory _UserState.fromJson(Map<String, dynamic> json) =
+      _$_UserState.fromJson;
+
+  @override
+  List<Project> get editedProjects;
+  @override
+  int? get numNotifcation;
+  @override
+  int? get numFollowRequests;
+  @override
+  List<String>? get bookmarkedTags;
+  @override
+  bool? get hasActiveSubscription;
+  @override
+  UserDisplayPrefs? get displayPrefs;
+  @override
+  User? get user;
+  @override
+  @JsonKey(ignore: true)
+  _$$_UserStateCopyWith<_$_UserState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+UserDisplayPrefs _$UserDisplayPrefsFromJson(Map<String, dynamic> json) {
+  return _UserDisplayPrefs.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UserDisplayPrefs {
+  bool get isAdult => throw _privateConstructorUsedError;
+  bool get explicitlyCollapseAdultContent => throw _privateConstructorUsedError;
+  bool get collapseLongThreads => throw _privateConstructorUsedError;
+  bool get gifsStartPaused => throw _privateConstructorUsedError;
+  bool get pauseProfileGifs => throw _privateConstructorUsedError;
+  bool get disableEmbeds => throw _privateConstructorUsedError;
+  bool get externalLinksInNewTab => throw _privateConstructorUsedError;
+  bool get enableNotificationCount => throw _privateConstructorUsedError;
+  List<String> get autoexpandCWs => throw _privateConstructorUsedError;
+  bool get suggestedFollowsDismissed => throw _privateConstructorUsedError;
+  bool get enableMobileQuickShare => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $UserDisplayPrefsCopyWith<UserDisplayPrefs> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserDisplayPrefsCopyWith<$Res> {
+  factory $UserDisplayPrefsCopyWith(
+          UserDisplayPrefs value, $Res Function(UserDisplayPrefs) then) =
+      _$UserDisplayPrefsCopyWithImpl<$Res, UserDisplayPrefs>;
+  @useResult
+  $Res call(
+      {bool isAdult,
+      bool explicitlyCollapseAdultContent,
+      bool collapseLongThreads,
+      bool gifsStartPaused,
+      bool pauseProfileGifs,
+      bool disableEmbeds,
+      bool externalLinksInNewTab,
+      bool enableNotificationCount,
+      List<String> autoexpandCWs,
+      bool suggestedFollowsDismissed,
+      bool enableMobileQuickShare});
+}
+
+/// @nodoc
+class _$UserDisplayPrefsCopyWithImpl<$Res, $Val extends UserDisplayPrefs>
+    implements $UserDisplayPrefsCopyWith<$Res> {
+  _$UserDisplayPrefsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isAdult = null,
+    Object? explicitlyCollapseAdultContent = null,
+    Object? collapseLongThreads = null,
+    Object? gifsStartPaused = null,
+    Object? pauseProfileGifs = null,
+    Object? disableEmbeds = null,
+    Object? externalLinksInNewTab = null,
+    Object? enableNotificationCount = null,
+    Object? autoexpandCWs = null,
+    Object? suggestedFollowsDismissed = null,
+    Object? enableMobileQuickShare = null,
+  }) {
+    return _then(_value.copyWith(
+      isAdult: null == isAdult
+          ? _value.isAdult
+          : isAdult // ignore: cast_nullable_to_non_nullable
+              as bool,
+      explicitlyCollapseAdultContent: null == explicitlyCollapseAdultContent
+          ? _value.explicitlyCollapseAdultContent
+          : explicitlyCollapseAdultContent // ignore: cast_nullable_to_non_nullable
+              as bool,
+      collapseLongThreads: null == collapseLongThreads
+          ? _value.collapseLongThreads
+          : collapseLongThreads // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gifsStartPaused: null == gifsStartPaused
+          ? _value.gifsStartPaused
+          : gifsStartPaused // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pauseProfileGifs: null == pauseProfileGifs
+          ? _value.pauseProfileGifs
+          : pauseProfileGifs // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableEmbeds: null == disableEmbeds
+          ? _value.disableEmbeds
+          : disableEmbeds // ignore: cast_nullable_to_non_nullable
+              as bool,
+      externalLinksInNewTab: null == externalLinksInNewTab
+          ? _value.externalLinksInNewTab
+          : externalLinksInNewTab // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableNotificationCount: null == enableNotificationCount
+          ? _value.enableNotificationCount
+          : enableNotificationCount // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoexpandCWs: null == autoexpandCWs
+          ? _value.autoexpandCWs
+          : autoexpandCWs // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      suggestedFollowsDismissed: null == suggestedFollowsDismissed
+          ? _value.suggestedFollowsDismissed
+          : suggestedFollowsDismissed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableMobileQuickShare: null == enableMobileQuickShare
+          ? _value.enableMobileQuickShare
+          : enableMobileQuickShare // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_UserDisplayPrefsCopyWith<$Res>
+    implements $UserDisplayPrefsCopyWith<$Res> {
+  factory _$$_UserDisplayPrefsCopyWith(
+          _$_UserDisplayPrefs value, $Res Function(_$_UserDisplayPrefs) then) =
+      __$$_UserDisplayPrefsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool isAdult,
+      bool explicitlyCollapseAdultContent,
+      bool collapseLongThreads,
+      bool gifsStartPaused,
+      bool pauseProfileGifs,
+      bool disableEmbeds,
+      bool externalLinksInNewTab,
+      bool enableNotificationCount,
+      List<String> autoexpandCWs,
+      bool suggestedFollowsDismissed,
+      bool enableMobileQuickShare});
+}
+
+/// @nodoc
+class __$$_UserDisplayPrefsCopyWithImpl<$Res>
+    extends _$UserDisplayPrefsCopyWithImpl<$Res, _$_UserDisplayPrefs>
+    implements _$$_UserDisplayPrefsCopyWith<$Res> {
+  __$$_UserDisplayPrefsCopyWithImpl(
+      _$_UserDisplayPrefs _value, $Res Function(_$_UserDisplayPrefs) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isAdult = null,
+    Object? explicitlyCollapseAdultContent = null,
+    Object? collapseLongThreads = null,
+    Object? gifsStartPaused = null,
+    Object? pauseProfileGifs = null,
+    Object? disableEmbeds = null,
+    Object? externalLinksInNewTab = null,
+    Object? enableNotificationCount = null,
+    Object? autoexpandCWs = null,
+    Object? suggestedFollowsDismissed = null,
+    Object? enableMobileQuickShare = null,
+  }) {
+    return _then(_$_UserDisplayPrefs(
+      isAdult: null == isAdult
+          ? _value.isAdult
+          : isAdult // ignore: cast_nullable_to_non_nullable
+              as bool,
+      explicitlyCollapseAdultContent: null == explicitlyCollapseAdultContent
+          ? _value.explicitlyCollapseAdultContent
+          : explicitlyCollapseAdultContent // ignore: cast_nullable_to_non_nullable
+              as bool,
+      collapseLongThreads: null == collapseLongThreads
+          ? _value.collapseLongThreads
+          : collapseLongThreads // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gifsStartPaused: null == gifsStartPaused
+          ? _value.gifsStartPaused
+          : gifsStartPaused // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pauseProfileGifs: null == pauseProfileGifs
+          ? _value.pauseProfileGifs
+          : pauseProfileGifs // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableEmbeds: null == disableEmbeds
+          ? _value.disableEmbeds
+          : disableEmbeds // ignore: cast_nullable_to_non_nullable
+              as bool,
+      externalLinksInNewTab: null == externalLinksInNewTab
+          ? _value.externalLinksInNewTab
+          : externalLinksInNewTab // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableNotificationCount: null == enableNotificationCount
+          ? _value.enableNotificationCount
+          : enableNotificationCount // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoexpandCWs: null == autoexpandCWs
+          ? _value._autoexpandCWs
+          : autoexpandCWs // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      suggestedFollowsDismissed: null == suggestedFollowsDismissed
+          ? _value.suggestedFollowsDismissed
+          : suggestedFollowsDismissed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enableMobileQuickShare: null == enableMobileQuickShare
+          ? _value.enableMobileQuickShare
+          : enableMobileQuickShare // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_UserDisplayPrefs implements _UserDisplayPrefs {
+  const _$_UserDisplayPrefs(
+      {this.isAdult = false,
+      this.explicitlyCollapseAdultContent = true,
+      this.collapseLongThreads = false,
+      this.gifsStartPaused = false,
+      this.pauseProfileGifs = false,
+      this.disableEmbeds = false,
+      this.externalLinksInNewTab = true,
+      this.enableNotificationCount = true,
+      final List<String> autoexpandCWs = const <String>[],
+      this.suggestedFollowsDismissed = false,
+      this.enableMobileQuickShare = true})
+      : _autoexpandCWs = autoexpandCWs;
+
+  factory _$_UserDisplayPrefs.fromJson(Map<String, dynamic> json) =>
+      _$$_UserDisplayPrefsFromJson(json);
+
+  @override
+  @JsonKey()
+  final bool isAdult;
+  @override
+  @JsonKey()
+  final bool explicitlyCollapseAdultContent;
+  @override
+  @JsonKey()
+  final bool collapseLongThreads;
+  @override
+  @JsonKey()
+  final bool gifsStartPaused;
+  @override
+  @JsonKey()
+  final bool pauseProfileGifs;
+  @override
+  @JsonKey()
+  final bool disableEmbeds;
+  @override
+  @JsonKey()
+  final bool externalLinksInNewTab;
+  @override
+  @JsonKey()
+  final bool enableNotificationCount;
+  final List<String> _autoexpandCWs;
+  @override
+  @JsonKey()
+  List<String> get autoexpandCWs {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_autoexpandCWs);
+  }
+
+  @override
+  @JsonKey()
+  final bool suggestedFollowsDismissed;
+  @override
+  @JsonKey()
+  final bool enableMobileQuickShare;
+
+  @override
+  String toString() {
+    return 'UserDisplayPrefs(isAdult: $isAdult, explicitlyCollapseAdultContent: $explicitlyCollapseAdultContent, collapseLongThreads: $collapseLongThreads, gifsStartPaused: $gifsStartPaused, pauseProfileGifs: $pauseProfileGifs, disableEmbeds: $disableEmbeds, externalLinksInNewTab: $externalLinksInNewTab, enableNotificationCount: $enableNotificationCount, autoexpandCWs: $autoexpandCWs, suggestedFollowsDismissed: $suggestedFollowsDismissed, enableMobileQuickShare: $enableMobileQuickShare)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UserDisplayPrefs &&
+            (identical(other.isAdult, isAdult) || other.isAdult == isAdult) &&
+            (identical(other.explicitlyCollapseAdultContent,
+                    explicitlyCollapseAdultContent) ||
+                other.explicitlyCollapseAdultContent ==
+                    explicitlyCollapseAdultContent) &&
+            (identical(other.collapseLongThreads, collapseLongThreads) ||
+                other.collapseLongThreads == collapseLongThreads) &&
+            (identical(other.gifsStartPaused, gifsStartPaused) ||
+                other.gifsStartPaused == gifsStartPaused) &&
+            (identical(other.pauseProfileGifs, pauseProfileGifs) ||
+                other.pauseProfileGifs == pauseProfileGifs) &&
+            (identical(other.disableEmbeds, disableEmbeds) ||
+                other.disableEmbeds == disableEmbeds) &&
+            (identical(other.externalLinksInNewTab, externalLinksInNewTab) ||
+                other.externalLinksInNewTab == externalLinksInNewTab) &&
+            (identical(
+                    other.enableNotificationCount, enableNotificationCount) ||
+                other.enableNotificationCount == enableNotificationCount) &&
+            const DeepCollectionEquality()
+                .equals(other._autoexpandCWs, _autoexpandCWs) &&
+            (identical(other.suggestedFollowsDismissed,
+                    suggestedFollowsDismissed) ||
+                other.suggestedFollowsDismissed == suggestedFollowsDismissed) &&
+            (identical(other.enableMobileQuickShare, enableMobileQuickShare) ||
+                other.enableMobileQuickShare == enableMobileQuickShare));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      isAdult,
+      explicitlyCollapseAdultContent,
+      collapseLongThreads,
+      gifsStartPaused,
+      pauseProfileGifs,
+      disableEmbeds,
+      externalLinksInNewTab,
+      enableNotificationCount,
+      const DeepCollectionEquality().hash(_autoexpandCWs),
+      suggestedFollowsDismissed,
+      enableMobileQuickShare);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UserDisplayPrefsCopyWith<_$_UserDisplayPrefs> get copyWith =>
+      __$$_UserDisplayPrefsCopyWithImpl<_$_UserDisplayPrefs>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserDisplayPrefsToJson(
+      this,
+    );
+  }
+}
+
+abstract class _UserDisplayPrefs implements UserDisplayPrefs {
+  const factory _UserDisplayPrefs(
+      {final bool isAdult,
+      final bool explicitlyCollapseAdultContent,
+      final bool collapseLongThreads,
+      final bool gifsStartPaused,
+      final bool pauseProfileGifs,
+      final bool disableEmbeds,
+      final bool externalLinksInNewTab,
+      final bool enableNotificationCount,
+      final List<String> autoexpandCWs,
+      final bool suggestedFollowsDismissed,
+      final bool enableMobileQuickShare}) = _$_UserDisplayPrefs;
+
+  factory _UserDisplayPrefs.fromJson(Map<String, dynamic> json) =
+      _$_UserDisplayPrefs.fromJson;
+
+  @override
+  bool get isAdult;
+  @override
+  bool get explicitlyCollapseAdultContent;
+  @override
+  bool get collapseLongThreads;
+  @override
+  bool get gifsStartPaused;
+  @override
+  bool get pauseProfileGifs;
+  @override
+  bool get disableEmbeds;
+  @override
+  bool get externalLinksInNewTab;
+  @override
+  bool get enableNotificationCount;
+  @override
+  List<String> get autoexpandCWs;
+  @override
+  bool get suggestedFollowsDismissed;
+  @override
+  bool get enableMobileQuickShare;
+  @override
+  @JsonKey(ignore: true)
+  _$$_UserDisplayPrefsCopyWith<_$_UserDisplayPrefs> get copyWith =>
+      throw _privateConstructorUsedError;
+}

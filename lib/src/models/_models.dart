@@ -10,3 +10,5 @@ part 'user.dart';
 part 'comment.dart';
 part 'tag.dart';
 part 'search_result.dart';
+part 'user_state.dart';
+part 'user_display_prefs.dart';

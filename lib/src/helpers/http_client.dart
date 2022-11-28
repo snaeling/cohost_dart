@@ -88,7 +88,7 @@ class HttpClient extends HttpClientBase {
     int index = 0;
 
     methods.forEach((queryKey, input) {
-      if (input != null) {
+      if (input != null && input.isNotEmpty) {
         inputMap[index.toString()] = {};
         input.forEach((inputKey, value) {
           inputMap[index.toString()]?[inputKey] = value;

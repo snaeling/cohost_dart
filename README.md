@@ -30,6 +30,7 @@ All endpoints are accessed through the Cohost class, here are the current (proba
 ### `Cohost.user`
 * login(cookie?, email?, password?)
 * loggedIn()
+* userState(handle)
 
 You can also use `Cohost.http` to make HTTP requests. It includes a tRPC helper. All requests will be authenticated if you have provided valid authentication data.
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:cohost_api/src/models/_models.dart';
+import 'package:cohost_api/cohost.dart';
 import 'package:cohost_api/src/services/base_service.dart';
 import 'package:cryptography/cryptography.dart';
 
@@ -115,6 +115,56 @@ class UserService extends BaseService {
       return User.fromJson(res);
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+  // projects.listEditedProjects,
+  // notifications.count,
+  // relationships.countFollowRequests,
+  // bookmarks.tags.list,
+  // subscriptions.hasActiveSubscription,
+  // users.displayPrefs,
+  // login.loggedIn
+  // {"1"%3A{"projectHandle"%3A"gec"}%2C"2"%3A{"projectHandle"%3A"gec"}}
+
+  /// Compilation of notifcation counts, follow reqs, bookmarks, prefs etc
+  Future<UserState> userState(String handle) async {
+    try {
+      var res = await httpClient.tRPC(methods: {
+        "projects.listEditedProjects": {},
+        "notifications.count": {"projectHndle": handle},
+        "relationships.countFollowRequests": {"projectHandle": handle},
+        "bookmarks.tags.list": {},
+        "subscriptions.hasActiveSubscription": {},
+        "users.displayPrefs": {},
+        "login.loggedIn": {},
+      }).timeout(httpClient.timeout);
+      if (res?[0]?['error'] != null) {
+        throw UnauthorizedException('UNAUTHORIZED');
+      }
+      // hec k
+      final projectsJson = res[0]?['result']?['data']['projects'];
+      List<Project> editedProjects =
+          projectsJson.map<Project>((e) => Project.fromJson(e)).toList();
+      int numNotifcation = res[1]?['result']?['data']['count'];
+      int numFollowRequests = res[2]?['result']?['data']['count'];
+      List<dynamic> bookmarksJson = res[3]?['result']?['data']['tags'];
+      List<String> bookmarkedTags =
+          bookmarksJson.map<String>((e) => e).toList();
+      bool hasActiveSubscription = res[4]?['result']?['data'];
+      UserDisplayPrefs displayPrefs =
+          UserDisplayPrefs.fromJson(res[5]?['result']?['data']);
+      User user = User.fromJson(res[6]?['result']?['data']);
+      return UserState(
+        editedProjects: editedProjects as List<Project>,
+        numNotifcation: numNotifcation,
+        numFollowRequests: numFollowRequests,
+        bookmarkedTags: bookmarkedTags as List<String>,
+        hasActiveSubscription: hasActiveSubscription,
+        displayPrefs: displayPrefs,
+        user: user,
+      );
+    } catch (e) {
+      rethrow;
     }
   }
 }

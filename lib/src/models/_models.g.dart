@@ -305,3 +305,70 @@ Map<String, dynamic> _$$_SearchResultToJson(_$_SearchResult instance) =>
       'result': instance.tags,
       'projects': instance.projects,
     };
+
+_$_UserState _$$_UserStateFromJson(Map<String, dynamic> json) => _$_UserState(
+      editedProjects: (json['editedProjects'] as List<dynamic>?)
+              ?.map((e) => Project.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Project>[],
+      numNotifcation: json['numNotifcation'] as int? ?? 0,
+      numFollowRequests: json['numFollowRequests'] as int? ?? 0,
+      bookmarkedTags: (json['bookmarkedTags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const <String>[],
+      hasActiveSubscription: json['hasActiveSubscription'] as bool? ?? false,
+      displayPrefs: json['displayPrefs'] == null
+          ? const UserDisplayPrefs()
+          : UserDisplayPrefs.fromJson(
+              json['displayPrefs'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? const User(loggedIn: false)
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_UserStateToJson(_$_UserState instance) =>
+    <String, dynamic>{
+      'editedProjects': instance.editedProjects,
+      'numNotifcation': instance.numNotifcation,
+      'numFollowRequests': instance.numFollowRequests,
+      'bookmarkedTags': instance.bookmarkedTags,
+      'hasActiveSubscription': instance.hasActiveSubscription,
+      'displayPrefs': instance.displayPrefs,
+      'user': instance.user,
+    };
+
+_$_UserDisplayPrefs _$$_UserDisplayPrefsFromJson(Map<String, dynamic> json) =>
+    _$_UserDisplayPrefs(
+      isAdult: json['isAdult'] as bool? ?? false,
+      explicitlyCollapseAdultContent:
+          json['explicitlyCollapseAdultContent'] as bool? ?? true,
+      collapseLongThreads: json['collapseLongThreads'] as bool? ?? false,
+      gifsStartPaused: json['gifsStartPaused'] as bool? ?? false,
+      pauseProfileGifs: json['pauseProfileGifs'] as bool? ?? false,
+      disableEmbeds: json['disableEmbeds'] as bool? ?? false,
+      externalLinksInNewTab: json['externalLinksInNewTab'] as bool? ?? true,
+      enableNotificationCount: json['enableNotificationCount'] as bool? ?? true,
+      autoexpandCWs: (json['autoexpandCWs'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const <String>[],
+      suggestedFollowsDismissed:
+          json['suggestedFollowsDismissed'] as bool? ?? false,
+      enableMobileQuickShare: json['enableMobileQuickShare'] as bool? ?? true,
+    );
+
+Map<String, dynamic> _$$_UserDisplayPrefsToJson(_$_UserDisplayPrefs instance) =>
+    <String, dynamic>{
+      'isAdult': instance.isAdult,
+      'explicitlyCollapseAdultContent': instance.explicitlyCollapseAdultContent,
+      'collapseLongThreads': instance.collapseLongThreads,
+      'gifsStartPaused': instance.gifsStartPaused,
+      'pauseProfileGifs': instance.pauseProfileGifs,
+      'disableEmbeds': instance.disableEmbeds,
+      'externalLinksInNewTab': instance.externalLinksInNewTab,
+      'enableNotificationCount': instance.enableNotificationCount,
+      'autoexpandCWs': instance.autoexpandCWs,
+      'suggestedFollowsDismissed': instance.suggestedFollowsDismissed,
+      'enableMobileQuickShare': instance.enableMobileQuickShare,
+    };
