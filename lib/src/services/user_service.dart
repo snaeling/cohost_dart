@@ -26,9 +26,11 @@ class UserService extends BaseService {
   /// For flutter, will hang the UI thread if not in an isolate!
   ///
   /// ### Parameters
-  /// - [cookie] A plain text cookie. Will take precedence over further parameters.
-  /// - [email] A plain text email.
-  /// - [password] A plain text password.
+  /// - [cookie] - A plain text cookie. Will take precedence over further parameters.
+  /// - [email] - A plain text email.
+  /// - [password] - A plain text password.
+  /// - [clientHash] - If you calculate the client hash yourself, you can provide
+  /// it instead of a password.
   Future<String> login({
     String? cookie,
     String? email,
@@ -77,10 +79,15 @@ class UserService extends BaseService {
       httpClient.setCookie = cookie;
       return cookie;
     } catch (e) {
-      throw Exception(e.toString());
+      rethrow;
     }
   }
 
+  /// Fetches the salt of an email as a Uint8List
+  ///
+  /// ### Parameters
+  ///
+  /// * [email] - an email, e.g. `example@example.com`
   Future<Uint8List> salt({
     required String email,
   }) async {
@@ -114,19 +121,34 @@ class UserService extends BaseService {
           .timeout(httpClient.timeout);
       return User.fromJson(res);
     } catch (e) {
-      throw Exception(e.toString());
+      rethrow;
     }
   }
-  // projects.listEditedProjects,
-  // notifications.count,
-  // relationships.countFollowRequests,
-  // bookmarks.tags.list,
-  // subscriptions.hasActiveSubscription,
-  // users.displayPrefs,
-  // login.loggedIn
-  // {"1"%3A{"projectHandle"%3A"gec"}%2C"2"%3A{"projectHandle"%3A"gec"}}
+
+  /// Fetches the pages the user has access to
+  ///
+  /// **Requires authentication**
+  Future<List<Project>> editedProjects() async {
+    try {
+      if (!httpClient.cookieProvided) {
+        throw UnauthorizedException(
+            "Authentication is required for this endpoint");
+      }
+      final res = await httpClient
+          .get(
+            path: '$api/projects/edited',
+          )
+          .timeout(httpClient.timeout);
+      List<dynamic> projects = res['projects'];
+      return projects.map((e) => Project.fromJson(e)).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   /// Compilation of notifcation counts, follow reqs, bookmarks, prefs etc
+  ///
+  /// **Requires authentication**
   Future<UserState> userState(String handle) async {
     try {
       var res = await httpClient.tRPC(methods: {
@@ -155,14 +177,56 @@ class UserService extends BaseService {
           UserDisplayPrefs.fromJson(res[5]?['result']?['data']);
       User user = User.fromJson(res[6]?['result']?['data']);
       return UserState(
-        editedProjects: editedProjects as List<Project>,
+        editedProjects: editedProjects,
         numNotifcation: numNotifcation,
         numFollowRequests: numFollowRequests,
-        bookmarkedTags: bookmarkedTags as List<String>,
+        bookmarkedTags: bookmarkedTags,
         hasActiveSubscription: hasActiveSubscription,
         displayPrefs: displayPrefs,
         user: user,
       );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Returns a list of [Project]s who follow the user
+  ///
+  /// **Requires authentication**
+  Future<List<Project>> getFollowers() async {
+    try {
+      if (!httpClient.cookieProvided) {
+        throw UnauthorizedException(
+            "Authentication is required for this endpoint");
+      }
+      final res = await httpClient
+          .get(
+            path: '$api/projects/followers',
+          )
+          .timeout(httpClient.timeout);
+      List<dynamic> projects = res['projects'];
+      return projects.map((e) => Project.fromJson(e)).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Returns a list of [Project]s who the user is following
+  ///
+  /// **Requires authentication**
+  Future<List<Project>> getFollowing() async {
+    try {
+      if (!httpClient.cookieProvided) {
+        throw UnauthorizedException(
+            "Authentication is required for this endpoint");
+      }
+      final res = await httpClient
+          .get(
+            path: '$api/projects/following',
+          )
+          .timeout(httpClient.timeout);
+      List<dynamic> projects = res['projects'];
+      return projects.map((e) => Project.fromJson(e)).toList();
     } catch (e) {
       rethrow;
     }

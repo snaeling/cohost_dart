@@ -5,8 +5,6 @@ import 'package:cohost_api/src/services/base_service.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http/http.dart';
 
-import '../exceptions/exceptions.dart';
-
 class PostsService extends BaseService {
   const PostsService(super.httpClient);
 
@@ -24,10 +22,16 @@ class PostsService extends BaseService {
           .timeout(httpClient.timeout);
       return Post.fromJson(res);
     } catch (e) {
-      throw Exception(e.toString());
+      rethrow;
     }
   }
 
+  /// Returns a [SinglePost] object based on a specified id.
+  ///
+  /// ### Parameters
+  ///
+  /// * [handle] - The posting project's handle, (e.g. `staff`)
+  /// * [id] - The id of the post. (e.g. `470372`)
   Future<SinglePost> getSinglePost(
     String handle,
     int id,
@@ -40,7 +44,7 @@ class PostsService extends BaseService {
       ).timeout(httpClient.timeout);
       return SinglePost.fromJson(res);
     } catch (e) {
-      throw Exception(e.toString());
+      rethrow;
     }
   }
 
@@ -79,12 +83,20 @@ class PostsService extends BaseService {
     }
   }
 
-  Future<List<Post>> getProfilePosts(int page, String handle) async {
+  /// Get post from a user, including stickied posts.
+  ///
+  /// ### Parameters
+  /// * [page] - Page to fetch (e.g. `0`).
+  /// * [handle] - The handle of the project (e.g. `staff`).
+  /// * [hideReplies] - If the response should include replies or not.
+  /// * [hideReplies] - If the response should include shares or not.
+  Future<List<Post>> getProfilePosts(int page, String handle,
+      {bool hideReplies = false, bool hideShares = false}) async {
     try {
       final res = await httpClient.tRPC(
         methods: {
           "posts.profilePosts": {
-            "options": {"hideReplies": false, "hideShares": false},
+            "options": {"hideReplies": hideReplies, "hideShares": hideShares},
             "page": page,
             "projectHandle": handle
           },
@@ -93,12 +105,27 @@ class PostsService extends BaseService {
       List<dynamic> posts = res['posts'];
       return posts.map((e) => Post.fromJson(e)).toList();
     } catch (e) {
-      throw Exception(e.toString());
+      rethrow;
     }
   }
 
+  /// The user's dashboard.
+  ///
+  /// Returns a list of [Post] by parsing the raw HTML response
+  ///
+  /// **Requires Authentication**
+  ///
+  /// ### Parameters
+  ///
+  /// - [timestamp] - The timestamp to use as a reference for skips, usually just
+  /// `DateTime.now()`
+  /// - [skip] - Amount of posts to skip. Should be in multiples of 20, starting from 0.
   Future<List<Post>> htmlDashboard([DateTime? timestamp, int? skip = 0]) async {
     try {
+      if (!httpClient.cookieProvided) {
+        throw UnauthorizedException(
+            "Authentication is required for this endpoint");
+      }
       Response res = await httpClient
           .get(
             path: "/",
@@ -111,7 +138,6 @@ class PostsService extends BaseService {
                 : {},
           )
           .timeout(httpClient.timeout);
-      print(res);
       final html = parse(res.bodyBytes);
       final rawPosts =
           html.getElementById("__COHOST_LOADER_STATE__")?.innerHtml;
@@ -128,10 +154,20 @@ class PostsService extends BaseService {
     } on UnauthorizedException {
       throw UnauthorizedException('Invalid cookie');
     } catch (e) {
-      throw Exception(e.toString());
+      rethrow;
     }
   }
 
+  /// The feed of a single tag.
+  ///
+  /// Returns a list of [Post] by parsing the raw HTML response
+  ///
+  /// ### Parameters
+  ///
+  /// - [tag] - The tag of the requested feed. Supports spaces. (e.g. `The Cohost Global Feed`)
+  /// - [timestamp] - The timestamp to use as a reference for skips, usually just
+  /// `DateTime.now()`
+  /// - [skip] - Amount of posts to skip. Should be in multiples of 20, starting from 0.
   Future<List<Post>> htmlTagged(String tag,
       [DateTime? timestamp, int? skip = 0]) async {
     try {
@@ -147,7 +183,6 @@ class PostsService extends BaseService {
                 : {},
           )
           .timeout(httpClient.timeout);
-      print(res);
       final html = parse(res.bodyBytes);
       final rawPosts =
           html.getElementById("__COHOST_LOADER_STATE__")?.innerHtml;
@@ -156,7 +191,44 @@ class PostsService extends BaseService {
       List<dynamic> posts = jsonDecode(rawPosts)['tagged-post-feed']['posts'];
       return posts.map((e) => Post.fromJson(e)).toList();
     } catch (e) {
-      throw Exception(e.toString());
+      rethrow;
+    }
+  }
+
+  /// The compilation feed of a users bookmarked tags.
+  ///
+  /// Returns a list of [Post] by parsing the raw HTML response
+  ///
+  /// ### Parameters
+  ///
+  /// - [timestamp] - The timestamp to use as a reference for skips, usually just
+  /// `DateTime.now()`
+  /// - [skip] - Amount of posts to skip. Should be in multiples of 20, starting from 0.
+  Future<List<Post>> htmlBookmarkedTagFeed(
+      [DateTime? timestamp, int? skip = 0]) async {
+    try {
+      Response res = await httpClient
+          .get(
+            path: "/rc/bookmarks",
+            raw: true,
+            queryParameters: timestamp != null
+                ? {
+                    "refTimestamp": timestamp.millisecondsSinceEpoch.toString(),
+                    "skipPosts": skip.toString()
+                  }
+                : {},
+          )
+          .timeout(httpClient.timeout);
+      final html = parse(res.bodyBytes);
+      final rawPosts =
+          html.getElementById("__COHOST_LOADER_STATE__")?.innerHtml;
+      // TODO fix up these exceptions
+      if (rawPosts == null) throw Exception('aa');
+      List<dynamic> posts =
+          jsonDecode(rawPosts)['bookmarked-tag-feed']['posts'];
+      return posts.map((e) => Post.fromJson(e)).toList();
+    } catch (e) {
+      rethrow;
     }
   }
 }

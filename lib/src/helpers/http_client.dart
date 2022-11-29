@@ -17,8 +17,8 @@ class HttpClient extends HttpClientBase {
   // currently a unnecessary_getters_setters so
   // TODO: make this a generic cookie jar
   set setCookie(String sid) => _sessionCookie = 'connect.sid=$sid';
-  String get getCookie => _sessionCookie;
-
+  String? get getCookie => _sessionCookie;
+  bool get cookieProvided => (_sessionCookie == '') ? false : true;
   // Future getCall({
   //   required String path,
   //   Map<String, dynamic> queryParameters = const {},
