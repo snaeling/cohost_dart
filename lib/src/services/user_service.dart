@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cohost_api/cohost.dart';
+import 'package:cohost_api/src/helpers/http_client.dart';
 import 'package:cohost_api/src/services/base_service.dart';
 import 'package:cryptography/cryptography.dart';
 
@@ -146,6 +147,26 @@ class UserService extends BaseService {
     }
   }
 
+  /// Switch the user's project
+  ///
+  /// **Requires authentication**
+  Future<void> switchProject(int projectId) async {
+    try {
+      if (!httpClient.cookieProvided) {
+        throw UnauthorizedException(
+            "Authentication is required for this endpoint");
+      }
+      await httpClient.tRPC(
+        methods: {
+          "projects.switchProject": {"projectId": projectId}
+        },
+      ).timeout(httpClient.timeout);
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Compilation of notifcation counts, follow reqs, bookmarks, prefs etc
   ///
   /// **Requires authentication**
@@ -227,6 +248,40 @@ class UserService extends BaseService {
           .timeout(httpClient.timeout);
       List<dynamic> projects = res['projects'];
       return projects.map((e) => Project.fromJson(e)).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // {"0":{"silence":["badtag"],"autoexpand":["cooltag"]}}
+  /// Mutate the user's CW settings with a ***new*** list of silenced and expanded
+  /// tags.
+  ///
+  /// **Requires authentication**
+  ///
+  /// ### Parameters
+  ///
+  /// * [silenced] - Tags to be sliences, include tags the user already had
+  /// silenced unless they are being removed.
+  /// * [autoexpanded] - Tags to be expanded, include tags the user already had
+  /// silenced unless they are being removed.
+  Future<void> mutateCwFilters(
+      {required List<String> silenced,
+      required List<String> autoexpanded}) async {
+    try {
+      if (!httpClient.cookieProvided) {
+        throw UnauthorizedException(
+            "Authentication is required for this endpoint");
+      }
+      await httpClient.tRPC(
+        methods: {
+          "users.cwFilters.mutate": {
+            "silence": silenced,
+            "autoexpand": autoexpanded,
+          }
+        },
+        method: TrpcMethod.post,
+      );
     } catch (e) {
       rethrow;
     }

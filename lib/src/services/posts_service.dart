@@ -231,4 +231,52 @@ class PostsService extends BaseService {
       rethrow;
     }
   }
+
+  /// Like a post with a specific project
+  ///
+  /// **Requires Authentication**
+  ///
+  /// ### Parameters
+  ///
+  /// - [editableProjectId] - The id of the project the user has control over.
+  /// - [postId] - The id of the post to like.
+  Future<void> likePost(int editableProjectId, int postId) async {
+    try {
+      if (!httpClient.cookieProvided) {
+        throw UnauthorizedException(
+            "Authentication is required for this endpoint");
+      }
+      await httpClient.post(
+        path:
+            '/rc/relationships/project-$editableProjectId/to-post-$postId/like',
+        raw: true,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Remove a like from a post with a specific project
+  ///
+  /// **Requires Authentication**
+  ///
+  /// ### Parameters
+  ///
+  /// - [editableProjectId] - The id of the project the user has control over.
+  /// - [postId] - The id of the post to like.
+  Future<void> unlikePost(int editableProjectId, int postId) async {
+    try {
+      if (!httpClient.cookieProvided) {
+        throw UnauthorizedException(
+            "Authentication is required for this endpoint");
+      }
+      await httpClient.post(
+        path:
+            '/rc/relationships/project-$editableProjectId/to-post-$postId/unlike',
+        raw: true,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

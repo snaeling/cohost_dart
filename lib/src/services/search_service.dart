@@ -66,29 +66,29 @@ class SearchService extends BaseService {
     }
   }
 
-  /// Get post from a user, including stickied posts.
-  ///
-  /// ### Parameters
-  /// * [page] - Page to fetch (e.g. `0`).
-  /// * [handle] - The handle of the project (e.g. `staff`).
-  /// * [hideReplies] - If the response should include replies or not.
-  /// * [hideReplies] - If the response should include shares or not.
-  Future<List<Post>> getProfilePosts(int page, String handle,
-      {bool hideReplies = false, bool hideShares = false}) async {
-    try {
-      final res = await httpClient.tRPC(
-        methods: {
-          "posts.profilePosts": {
-            "options": {"hideReplies": hideReplies, "hideShares": hideShares},
-            "page": page,
-            "projectHandle": handle
-          },
-        },
-      ).timeout(httpClient.timeout);
-      List<dynamic> posts = res['posts'];
-      return posts.map((e) => Post.fromJson(e)).toList();
-    } catch (e) {
-      rethrow;
-    }
-  }
+  // /// Get post from a user, including stickied posts.
+  // ///
+  // /// ### Parameters
+  // /// * [page] - Page to fetch (e.g. `0`).
+  // /// * [handle] - The handle of the project (e.g. `staff`).
+  // /// * [hideReplies] - If the response should include replies or not.
+  // /// * [hideReplies] - If the response should include shares or not.
+  // Future<List<Post>> getProfilePosts(int page, String handle,
+  //     {bool hideReplies = false, bool hideShares = false}) async {
+  //   try {
+  //     final res = await httpClient.tRPC(
+  //       methods: {
+  //         "posts.profilePosts": {
+  //           "options": {"hideReplies": hideReplies, "hideShares": hideShares},
+  //           "page": page,
+  //           "projectHandle": handle
+  //         },
+  //       },
+  //     ).timeout(httpClient.timeout);
+  //     List<dynamic> posts = res['posts'];
+  //     return posts.map((e) => Post.fromJson(e)).toList();
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 }

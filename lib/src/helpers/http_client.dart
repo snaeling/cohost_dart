@@ -79,6 +79,7 @@ class HttpClient extends HttpClientBase {
   Future<T?> tRPC<T>({
     required Map<String, Map<String, dynamic>?> methods,
     int batch = 1,
+    TrpcMethod method = TrpcMethod.get,
   }) async {
     final headers = {
       'Cookie': _sessionCookie,
@@ -96,17 +97,38 @@ class HttpClient extends HttpClientBase {
       }
       index++;
     });
+    late final dynamic res;
+    switch (method) {
+      case TrpcMethod.get:
+        final queryParameters = {
+          "batch": batch.toString(),
+          "input": json.encode(inputMap).toString(),
+        };
 
-    final queryParameters = {
-      "batch": batch.toString(),
-      "input": json.encode(inputMap).toString(),
-    };
+        final Uri uri = Uri.https(
+            _authority, '$_apiBase$_tPRC$methodList', queryParameters);
 
-    final Uri uri =
-        Uri.https(_authority, '$_apiBase$_tPRC$methodList', queryParameters);
+        res = await http.get(uri, headers: headers);
+        break;
+      case TrpcMethod.post:
+        final queryParameters = {
+          "batch": batch.toString(),
+        };
 
-    final res = await http.get(uri, headers: headers);
+        final Uri uri = Uri.https(
+            _authority, '$_apiBase$_tPRC$methodList', queryParameters);
+
+        res = await http.post(uri,
+            body: json.encode(inputMap).toString(), headers: headers);
+        return res;
+    }
     if (methods.keys.length > 1) return jsonDecode(utf8.decode(res.bodyBytes));
+    // TODO: not good
     return jsonDecode(utf8.decode(res.bodyBytes))[0]['result']['data'] as T;
   }
+}
+
+enum TrpcMethod {
+  get,
+  post,
 }
